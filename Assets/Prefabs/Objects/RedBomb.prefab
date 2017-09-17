@@ -22,9 +22,9 @@ GameObject:
   - component: {fileID: 114647924099847490}
   - component: {fileID: 114209259923199958}
   - component: {fileID: 225941757695130720}
-  - component: {fileID: 58990951439669550}
   - component: {fileID: 50235448480575174}
   - component: {fileID: 95608651978537376}
+  - component: {fileID: 58160948357621218}
   m_Layer: 11
   m_Name: RedBomb
   m_TagString: Untagged
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &58990951439669550
+--- !u!58 &58160948357621218
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -143,9 +143,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03, y: -0.01}
+  m_Offset: {x: -0.035331964, y: -0.0482125}
   serializedVersion: 2
-  m_Radius: 0.36124974
+  m_Radius: 0.43737775
 --- !u!95 &95608651978537376
 Animator:
   serializedVersion: 3
@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 225941757695130720}
-  circleCollider: {fileID: 58990951439669550}
+  circleCollider: {fileID: 58160948357621218}
   bomb: {fileID: 114209259923199958}
 --- !u!114 &114670046692120500
 MonoBehaviour:
