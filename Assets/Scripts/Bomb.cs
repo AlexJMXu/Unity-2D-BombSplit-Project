@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bomb : MonoBehaviour {
 
 	private float speed = 1f;
 	private Vector2 direction;
+
 	[SerializeField] private int type;
 	private Transform target;
 
@@ -46,6 +45,7 @@ public class Bomb : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
+		// Set z pos to y pos to create a sense of depth in this 2D view
 		transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
 		
 		if (beingCollected) MoveToTarget();

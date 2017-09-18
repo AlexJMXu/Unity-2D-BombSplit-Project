@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EndManager : MonoBehaviour {
@@ -44,6 +43,7 @@ public class EndManager : MonoBehaviour {
 				yield return new WaitUntil(() => bombManager.insideRed == 0);
 				scoreManager.ShowScore();
 				break;
+
 			case 1:
 				yield return new WaitForSeconds(0.5f);
 				bombManager.DetonateBombsOutside();
@@ -54,6 +54,7 @@ public class EndManager : MonoBehaviour {
 				yield return new WaitUntil(() => bombManager.insideRed == 0);
 				scoreManager.ShowScore();
 				break;
+			
 			case 2:
 				yield return new WaitForSeconds(0.5f);
 				bombManager.DetonateBombsOutside();

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -45,9 +44,7 @@ public class GameManager : MonoBehaviour {
 		if (!_gameStarted && Input.GetButtonDown("Fire1")) {
 			_gameStarted = true;
 			StartGame();
-		}
-
-		if (readyToRestart && Input.GetButtonDown("Fire1")) {
+		} else if (readyToRestart && Input.GetButtonDown("Fire1")) {
 			sceneFader.FadeTo(SceneManager.GetActiveScene().name);
 		}
 

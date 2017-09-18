@@ -41,6 +41,7 @@ public class BombManager : MonoBehaviour {
 		gameManager = GameManager.instance;
 	}
 
+
 	public void DetonateBombsOutside() {
 		StartCoroutine(DetonateBombsOutsideCoroutine());
 	}
@@ -60,6 +61,7 @@ public class BombManager : MonoBehaviour {
 	public void CollectRedBombs() {
 		StartCoroutine(CollectRedBombsCoroutine());
 	}
+
 
 	private IEnumerator DetonateBombsOutsideCoroutine() {
 		for (int i = 0; i < _bombs.Count; i++) {
@@ -90,6 +92,7 @@ public class BombManager : MonoBehaviour {
 
 		_bombsInRed.Clear();
 	}
+
 
 	private IEnumerator CollectGreyBombsCoroutine() {
 		gameManager.StopAllMovement();
@@ -131,6 +134,7 @@ public class BombManager : MonoBehaviour {
 		if (!gameManager.gameEnded)  gameManager.StartAllMovement();
 	}
 
+
 	public void AddBomb(Bomb bomb) {
 		_bombs.Add(bomb);
 		_outsideZone++;
@@ -156,6 +160,11 @@ public class BombManager : MonoBehaviour {
 		}
 	}
 
+	public void RemoveFromOutside(Bomb bomb) {
+		_bombs.Remove(bomb);
+		_outsideZone--;
+	}
+
 	public void RemoveFromGreyZone(Bomb bomb) {
 		_bombsInGrey.Remove(bomb);
 		_insideGrey--;
@@ -166,10 +175,5 @@ public class BombManager : MonoBehaviour {
 		_bombsInRed.Remove(bomb);
 		_insideRed--;
 		gameManager.AddScore(1);
-	}
-
-	public void RemoveFromOutside(Bomb bomb) {
-		_bombs.Remove(bomb);
-		_outsideZone--;
 	}
 }

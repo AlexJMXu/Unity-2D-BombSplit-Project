@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler {
@@ -8,6 +6,9 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
 	[SerializeField] private CanvasGroup canvasGroup;
 	[SerializeField] private CircleCollider2D circleCollider;
 	[SerializeField] private Bomb bomb;
+
+	private float screenWidth = 6.5f;
+	private float screenHeight = 4.5f;
 
 	public void OnPointerDown(PointerEventData eventData) {
 		canvasGroup.blocksRaycasts = false;
@@ -24,8 +25,8 @@ public class Draggable : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
     	screenPoint.z = 1f; 
     	transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
 
-    	transform.position = new Vector3 (Mathf.Clamp(transform.position.x, -6.5f, 6.5f),
-    									  Mathf.Clamp(transform.position.y, -4.5f, 4.5f),
+    	transform.position = new Vector3 (Mathf.Clamp(transform.position.x, -screenWidth, screenWidth),
+    									  Mathf.Clamp(transform.position.y, -screenHeight, screenHeight),
     									  transform.position.z);
 
 	}
