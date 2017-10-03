@@ -71,9 +71,9 @@ public class BombManager : MonoBehaviour {
 
 	private IEnumerator DetonateBombsOutsideCoroutine() {
 		for (int i = 0; i < _bombs.Count; i++) {
+			yield return new WaitForSeconds(0.1f);
 			_bombs[i].Explode();
 			_outsideZone--;
-			yield return new WaitForSeconds(0.1f);
 		}
 
 		_bombs.Clear();
@@ -81,9 +81,9 @@ public class BombManager : MonoBehaviour {
 
 	private IEnumerator DetonateBombsInGreyCoroutine() {
 		for (int i = 0; i < _bombsInGrey.Count; i++) {
+			yield return new WaitForSeconds(0.1f);
 			_bombsInGrey[i].Explode();
 			_insideGrey--;
-			yield return new WaitForSeconds(0.1f);
 		}
 
 		_bombsInGrey.Clear();
@@ -91,9 +91,9 @@ public class BombManager : MonoBehaviour {
 
 	private IEnumerator DetonateBombsInRedCoroutine() {
 		for (int i = 0; i < _bombsInRed.Count; i++) {
+			yield return new WaitForSeconds(0.1f);
 			_bombsInRed[i].Explode();
 			_insideRed--;
-			yield return new WaitForSeconds(0.1f);
 		}
 
 		_bombsInRed.Clear();

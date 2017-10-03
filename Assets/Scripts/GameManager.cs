@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour {
 			} else if (readyToRestart) {
 				audioManager.PlaySound("ClickSound");
 				sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+			} else if (scoreManager.showingScore) {
+				scoreManager.SkipShowScore();
 			}
 		}
 
@@ -74,6 +76,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void EndGame(int procedure, Bomb bomb) {
+		List<Bomb> bombs = bombManager.bombs;
+		for (int i = 0; i < bombs.Count; i++) {
+			bombs[i].GetComponent<Draggable>().enabled = false;
+		}
+
 		_gameEnded = true;
 		StopAllMovement();
 		endManager.EndGame(procedure, bomb);
@@ -93,6 +100,7 @@ public class GameManager : MonoBehaviour {
 
 		for (int i = 0; i < bombs.Count; i++) {
 			bombs[i].canMove = false;
+			bombs[i].bombFuseSound.Pause();
 		}
 		for (int i = 0; i < bombsInGrey.Count; i++) {
 			bombsInGrey[i].canMove = false;
@@ -112,6 +120,7 @@ public class GameManager : MonoBehaviour {
 
 		for (int i = 0; i < bombs.Count; i++) {
 			bombs[i].canMove = true;
+			bombs[i].bombFuseSound.UnPause();
 		}
 		for (int i = 0; i < bombsInGrey.Count; i++) {
 			bombsInGrey[i].canMove = true;

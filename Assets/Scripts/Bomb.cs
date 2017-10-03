@@ -26,6 +26,8 @@ public class Bomb : MonoBehaviour {
 	private BombManager bombManager;
 	private AudioManager audioManager;
 
+	public AudioSource bombFuseSound;
+
 	void Start () {
 		gameManager = GameManager.instance;
 		bombManager = BombManager.instance;
@@ -33,6 +35,7 @@ public class Bomb : MonoBehaviour {
 
 		direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
 		fuseParticles.SetActive(true);
+		bombFuseSound.Play();
 	}
 	
 	void Update () {
@@ -111,5 +114,6 @@ public class Bomb : MonoBehaviour {
 		isSafe = true;
 		GetComponent<Draggable>().enabled = false;
 		warningCanvas.SetActive(false);
+		bombFuseSound.Stop();
 	}
 }

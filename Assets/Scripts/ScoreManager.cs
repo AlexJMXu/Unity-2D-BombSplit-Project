@@ -11,6 +11,11 @@ public class ScoreManager : MonoBehaviour {
 	[SerializeField] private Text highscoreText;
 	[SerializeField] private GameObject restartText;
 
+	private IEnumerator showScoreInstance;
+
+	private bool _showingScore = false;
+	public bool showingScore { get { return _showingScore; } }
+
 	private GameManager gameManager;
 
 	void Awake() {
@@ -28,7 +33,14 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	public void ShowScore() {
-		StartCoroutine(ShowScoreCoroutine());
+		_showingScore = true;
+		showScoreInstance = ShowScoreCoroutine();
+		StartCoroutine(showScoreInstance);
+	}
+
+	public void SkipShowScore() {
+		StopCoroutine(showScoreInstance);
+		FinishShowScore();
 	}
 
 	private IEnumerator ShowScoreCoroutine() {
@@ -40,6 +52,10 @@ public class ScoreManager : MonoBehaviour {
 			yield return new WaitForSeconds(0.1f);
 		}
 
+		FinishShowScore();
+	}
+
+	private void FinishShowScore() {
 		int oldHighscore = PlayerPrefs.GetInt("highscore");
 		if (score > oldHighscore) {
 			PlayerPrefs.SetInt("highscore", score);
