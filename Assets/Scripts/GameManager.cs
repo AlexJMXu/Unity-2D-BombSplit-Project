@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
 	private BombManager bombManager;
 	private ScoreManager scoreManager;
 	private EndManager endManager;
+	private AudioManager audioManager;
 
 	[SerializeField] private GameObject startOverlay;
 	[SerializeField] private SceneFader sceneFader;
@@ -36,16 +37,21 @@ public class GameManager : MonoBehaviour {
 		bombManager = BombManager.instance;
 		scoreManager = ScoreManager.instance;
 		endManager = EndManager.instance;
+		audioManager = AudioManager.instance;
 
 		spawnManager.enabled = false;
 	}
 
 	void Update() {
-		if (!_gameStarted && Input.GetButtonDown("Fire1")) {
-			_gameStarted = true;
-			StartGame();
-		} else if (readyToRestart && Input.GetButtonDown("Fire1")) {
-			sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+		if (Input.GetButtonDown("Fire1")) {
+			if (!_gameStarted) {
+				audioManager.PlaySound("ClickSound");
+				_gameStarted = true;
+				StartGame();
+			} else if (readyToRestart) {
+				audioManager.PlaySound("ClickSound");
+				sceneFader.FadeTo(SceneManager.GetActiveScene().name);
+			}
 		}
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {

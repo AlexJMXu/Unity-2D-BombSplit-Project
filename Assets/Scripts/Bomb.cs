@@ -19,16 +19,20 @@ public class Bomb : MonoBehaviour {
 
 	[SerializeField] private GameObject warningCanvas;
 	[SerializeField] private GameObject explosionParticles;
+	[SerializeField] private GameObject fuseParticles;
 	[SerializeField] private LayerMask whatToHit;
 
 	private GameManager gameManager;
 	private BombManager bombManager;
+	private AudioManager audioManager;
 
 	void Start () {
 		gameManager = GameManager.instance;
 		bombManager = BombManager.instance;
+		audioManager = AudioManager.instance;
 
 		direction = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+		fuseParticles.SetActive(true);
 	}
 	
 	void Update () {
@@ -59,6 +63,7 @@ public class Bomb : MonoBehaviour {
 	}
 
 	public void Explode() {
+		audioManager.PlaySound("ExplosionSound");
 		GameObject go = (GameObject) Instantiate(explosionParticles, transform.position, Quaternion.identity);
 		Destroy(go, 3);
 		Destroy(this.gameObject);
@@ -89,19 +94,22 @@ public class Bomb : MonoBehaviour {
 				gameManager.EndGame(1, this);
 			} else {
 				bombManager.AddToGreyZone(this);
-				isSafe = true;
-				GetComponent<Draggable>().enabled = false;
-				warningCanvas.SetActive(false);
+				SetSafe();
 			}
 		} else if (col.gameObject.tag == "Redzone") {
 			if (type != 1) {
 				gameManager.EndGame(2, this);
 			} else {
 				bombManager.AddToRedZone(this);
-				isSafe = true;
-				GetComponent<Draggable>().enabled = false;
-				warningCanvas.SetActive(false);
+				SetSafe();
 			}
 		}
+	}
+
+	void SetSafe() {
+		fuseParticles.SetActive(false);
+		isSafe = true;
+		GetComponent<Draggable>().enabled = false;
+		warningCanvas.SetActive(false);
 	}
 }

@@ -15,6 +15,7 @@ public class SpawnManager : MonoBehaviour {
 	[SerializeField] private Animator[] doorAnimator;
 
 	private BombManager bombManager;
+	private AudioManager audioManager;
 
 	void Awake() {
 		if (instance == null) {
@@ -24,11 +25,13 @@ public class SpawnManager : MonoBehaviour {
 
 	void Start() {
 		bombManager = BombManager.instance;
+		audioManager = AudioManager.instance;
 	}
 	
 	void Update () {
 		spawnCounter += Time.deltaTime;
 		if (spawnCounter >= spawnTimer) {
+			audioManager.PlaySound("DoorSound");
 			for (int i = 0; i < spawnAmount; i++) {
 				int point = Random.Range(0, spawnPoint.Length);
 				int type = Random.Range(0, bombType.Length);

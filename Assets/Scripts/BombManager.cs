@@ -24,12 +24,14 @@ public class BombManager : MonoBehaviour {
 	private int _insideRed = 0;
 	public int insideRed { get { return _insideRed; } }
 
-	private int limit = 20;
+	[SerializeField] private int limit = 20;
+	private float waitTime = 1f;
 
 	[SerializeField] private Animator[] doorAnimator;
 	[SerializeField] private Transform[] collectionPoint;
 
 	private GameManager gameManager;
+	private AudioManager audioManager;
 
 	void Awake() {
 		if (instance == null) {
@@ -39,6 +41,7 @@ public class BombManager : MonoBehaviour {
 
 	void Start() {
 		gameManager = GameManager.instance;
+		audioManager = AudioManager.instance;
 	}
 
 
@@ -55,13 +58,16 @@ public class BombManager : MonoBehaviour {
 	}
 
 	public void CollectGreyBombs() {
+		if (_insideGrey == 0) return;
+		audioManager.PlaySound("WhistleSound");
 		StartCoroutine(CollectGreyBombsCoroutine());
 	}
 
 	public void CollectRedBombs() {
+		if (_insideRed == 0) return;
+		audioManager.PlaySound("WhistleSound");
 		StartCoroutine(CollectRedBombsCoroutine());
 	}
-
 
 	private IEnumerator DetonateBombsOutsideCoroutine() {
 		for (int i = 0; i < _bombs.Count; i++) {
@@ -97,6 +103,9 @@ public class BombManager : MonoBehaviour {
 	private IEnumerator CollectGreyBombsCoroutine() {
 		gameManager.StopAllMovement();
 
+		yield return new WaitForSeconds(waitTime);
+
+		audioManager.PlaySound("DoorSound");
 		doorAnimator[0].Play("Open");
 
 		for (int i = 0; i < _bombsInGrey.Count; i++) {
@@ -117,6 +126,9 @@ public class BombManager : MonoBehaviour {
 	private IEnumerator CollectRedBombsCoroutine() {
 		gameManager.StopAllMovement();
 
+		yield return new WaitForSeconds(waitTime);
+
+		audioManager.PlaySound("DoorSound");
 		doorAnimator[1].Play("Open");
 
 		for (int i = 0; i < _bombsInRed.Count; i++) {
