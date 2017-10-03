@@ -40,6 +40,7 @@ public class ScoreManager : MonoBehaviour {
 
 	public void SkipShowScore() {
 		StopCoroutine(showScoreInstance);
+		scoreCount.text = score.ToString();;
 		FinishShowScore();
 	}
 
