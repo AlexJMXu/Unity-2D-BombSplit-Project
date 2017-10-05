@@ -1089,12 +1089,12 @@ Prefab:
     - target: {fileID: 114730018637753958, guid: 1c304f823cff54ce6ab9ee42ae220409,
         type: 2}
       propertyPath: sounds.Array.data[2].volume
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 114730018637753958, guid: 1c304f823cff54ce6ab9ee42ae220409,
         type: 2}
       propertyPath: sounds.Array.data[2].pitch
-      value: 1.1
+      value: 1.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c304f823cff54ce6ab9ee42ae220409, type: 2}
